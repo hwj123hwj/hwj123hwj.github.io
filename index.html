@@ -4,46 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hwj123hwj - 开源项目</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-mono/style.min.css" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        /* ===== TOKENS (OKLCH) ===== */
         :root {
-            --bg: #fafafa;
-            --bg-elevated: #ffffff;
-            --bg-code: #1a1a2e;
-            --text: #18181b;
-            --text-secondary: #71717a;
-            --text-tertiary: #a1a1aa;
-            --border: #e4e4e7;
-            --accent: #2563eb;
-            --accent-soft: #eff6ff;
-            --radius: 12px;
-            --radius-sm: 8px;
+            --primary: oklch(0.55 0.14 250);
+            --primary-soft: oklch(0.95 0.03 250);
+            --bg: oklch(1.000 0.000 0);
+            --surface: oklch(0.97 0.005 250);
+            --ink: oklch(0.13 0.02 250);
+            --muted: oklch(0.50 0.02 250);
+            --accent: oklch(0.58 0.14 160);
+            --accent-soft: oklch(0.94 0.04 160);
+            --border: oklch(0.90 0.01 250);
+            --radius: 10px;
+            --radius-sm: 7px;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: #09090b;
-                --bg-elevated: #18181b;
-                --bg-code: #0f0f1a;
-                --text: #fafafa;
-                --text-secondary: #a1a1aa;
-                --text-tertiary: #71717a;
-                --border: #27272a;
-                --accent: #3b82f6;
-                --accent-soft: #172554;
+                --primary: oklch(0.70 0.14 250);
+                --primary-soft: oklch(0.20 0.05 250);
+                --bg: oklch(0.10 0.005 250);
+                --surface: oklch(0.14 0.008 250);
+                --ink: oklch(0.93 0.01 250);
+                --muted: oklch(0.58 0.02 250);
+                --accent: oklch(0.72 0.14 160);
+                --accent-soft: oklch(0.20 0.04 160);
+                --border: oklch(0.22 0.01 250);
             }
         }
 
+        /* ===== RESET ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+            font-family: "Geist Sans", -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
-            color: var(--text);
+            color: var(--ink);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        a { color: var(--accent); text-decoration: none; }
+        a { color: var(--primary); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
         /* ===== NAV ===== */
@@ -53,69 +59,73 @@
             z-index: 50;
             background: var(--bg);
             border-bottom: 1px solid var(--border);
-            padding: 0 24px;
+            padding: 0 clamp(16px, 4vw, 32px);
             height: 56px;
             display: flex;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .nav-name {
             font-weight: 700;
-            font-size: 0.95rem;
-            color: var(--text);
+            font-size: 0.9rem;
+            color: var(--ink);
+            font-family: "Geist Mono", monospace;
             letter-spacing: -0.02em;
         }
 
         .nav-links { margin-left: auto; display: flex; gap: 20px; }
-
         .nav-links a {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            transition: color 0.2s;
+            font-size: 0.82rem;
+            color: var(--muted);
+            transition: color 0.2s ease-out;
+            font-weight: 500;
         }
-
-        .nav-links a:hover { color: var(--text); text-decoration: none; }
+        .nav-links a:hover { color: var(--ink); text-decoration: none; }
 
         /* ===== HERO (Asymmetric Split) ===== */
         .hero {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 80px 24px 64px;
+            padding: clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px) clamp(40px, 6vw, 72px);
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: clamp(32px, 5vw, 64px);
             align-items: center;
             min-height: 60vh;
         }
 
-        .hero-text { max-width: 520px; }
+        .hero-text { max-width: 540px; }
 
         .hero-eyebrow {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            margin-bottom: 16px;
+            letter-spacing: 0.08em;
+            color: var(--primary);
+            margin-bottom: 14px;
+            font-family: "Geist Mono", monospace;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
             font-weight: 800;
-            line-height: 1.1;
+            line-height: 1.08;
             letter-spacing: -0.03em;
-            color: var(--text);
+            color: var(--ink);
             margin-bottom: 20px;
+            text-wrap: balance;
         }
 
         .hero-sub {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            color: var(--muted);
             line-height: 1.7;
             margin-bottom: 32px;
-            max-width: 42ch;
+            max-width: 44ch;
         }
 
         .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -124,36 +134,39 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            padding: 11px 22px;
+            border-radius: 9px;
+            font-size: 0.88rem;
             font-weight: 600;
-            transition: all 0.2s;
+            transition: all 0.2s ease-out;
             border: none;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .btn-primary {
-            background: var(--text);
+            background: var(--ink);
             color: var(--bg);
         }
 
         .btn-primary:hover {
             opacity: 0.85;
             text-decoration: none;
+            transform: translateY(-1px);
         }
 
         .btn-ghost {
             background: transparent;
-            color: var(--text);
+            color: var(--ink);
             border: 1px solid var(--border);
         }
 
         .btn-ghost:hover {
-            border-color: var(--text-secondary);
+            border-color: var(--muted);
             text-decoration: none;
         }
 
+        /* Hero visual */
         .hero-visual {
             display: flex;
             flex-direction: column;
@@ -161,254 +174,256 @@
         }
 
         .hero-card {
-            background: var(--bg-code);
+            background: oklch(0.14 0.01 250);
             border-radius: var(--radius);
-            padding: 20px 24px;
-            color: #e4e4e7;
-            font-family: "SF Mono", "Fira Code", "JetBrains Mono", monospace;
-            font-size: 0.82rem;
-            line-height: 1.8;
-            border: 1px solid #27272a;
+            padding: 20px 22px;
+            color: oklch(0.85 0.01 250);
+            font-family: "Geist Mono", monospace;
+            font-size: 0.78rem;
+            line-height: 1.9;
+            border: 1px solid oklch(0.22 0.01 250);
         }
 
-        .hero-card .prompt { color: #71717a; }
-        .hero-card .cmd { color: #60a5fa; }
-        .hero-card .output { color: #a1a1aa; }
-        .hero-card .highlight { color: #34d399; }
+        @media (prefers-color-scheme: dark) {
+            .hero-card {
+                background: oklch(0.18 0.01 250);
+                border-color: oklch(0.26 0.01 250);
+            }
+        }
+
+        .hero-card .prompt { color: oklch(0.45 0.02 250); }
+        .hero-card .cmd { color: oklch(0.75 0.12 250); }
+        .hero-card .output { color: oklch(0.65 0.02 250); }
+        .hero-card .hl { color: oklch(0.75 0.14 160); }
 
         .hero-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 10px;
         }
 
         .stat-card {
-            background: var(--bg-elevated);
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
-            padding: 16px;
+            padding: 14px;
             text-align: center;
+            transition: border-color 0.2s ease-out;
         }
 
+        .stat-card:hover { border-color: var(--primary); }
+
         .stat-num {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
-            color: var(--text);
+            color: var(--ink);
             letter-spacing: -0.02em;
+            font-family: "Geist Mono", monospace;
         }
 
         .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
+            font-size: 0.72rem;
+            color: var(--muted);
             margin-top: 2px;
+            font-weight: 500;
         }
 
         /* ===== SECTIONS ===== */
         .section {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 64px 24px;
+            padding: clamp(48px, 6vw, 72px) clamp(16px, 4vw, 32px);
         }
 
         .section + .section { border-top: 1px solid var(--border); }
 
         .section-head {
-            margin-bottom: 40px;
+            margin-bottom: 36px;
         }
 
         .section-head h2 {
-            font-size: 1.6rem;
+            font-size: clamp(1.3rem, 2.5vw, 1.7rem);
             font-weight: 700;
             letter-spacing: -0.02em;
-            color: var(--text);
+            color: var(--ink);
+            text-wrap: balance;
         }
 
         .section-head p {
-            color: var(--text-secondary);
+            color: var(--muted);
             margin-top: 6px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            max-width: 55ch;
         }
 
         /* ===== PROJECT CARDS ===== */
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 14px;
         }
 
         .project-card {
-            background: var(--bg-elevated);
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 24px;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            padding: 22px;
+            transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;
             display: flex;
             flex-direction: column;
         }
 
         .project-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 1px var(--accent);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px var(--primary);
         }
 
         .card-top {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .card-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            color: var(--text);
+            color: var(--ink);
             letter-spacing: -0.01em;
         }
 
         .card-title a { color: inherit; }
-        .card-title a:hover { color: var(--accent); text-decoration: none; }
+        .card-title a:hover { color: var(--primary); text-decoration: none; }
 
         .card-lang {
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
+            font-size: 0.72rem;
+            color: var(--muted);
             font-weight: 500;
             white-space: nowrap;
+            font-family: "Geist Mono", monospace;
         }
 
         .card-desc {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
+            font-size: 0.85rem;
+            color: var(--muted);
             line-height: 1.6;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             flex: 1;
+            max-width: 55ch;
         }
 
         /* Install box */
         .install-box {
-            background: var(--bg-code);
+            background: oklch(0.14 0.01 250);
             border-radius: var(--radius-sm);
-            padding: 12px 14px;
+            padding: 10px 12px;
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .install-box {
+                background: oklch(0.18 0.01 250);
+            }
         }
 
         .install-box code {
             flex: 1;
-            font-family: "SF Mono", "Fira Code", "JetBrains Mono", monospace;
-            font-size: 0.72rem;
-            color: #a1a1aa;
+            font-family: "Geist Mono", monospace;
+            font-size: 0.68rem;
+            color: oklch(0.65 0.02 250);
             overflow-x: auto;
             white-space: nowrap;
+            scrollbar-width: none;
         }
+
+        .install-box code::-webkit-scrollbar { display: none; }
 
         .copy-btn {
-            padding: 4px 10px;
-            background: #27272a;
-            border: 1px solid #3f3f46;
-            border-radius: 6px;
-            color: #a1a1aa;
+            padding: 3px 9px;
+            background: oklch(0.22 0.01 250);
+            border: 1px solid oklch(0.30 0.01 250);
+            border-radius: 5px;
+            color: oklch(0.65 0.02 250);
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.66rem;
             font-weight: 500;
-            transition: all 0.15s;
+            transition: all 0.15s ease-out;
             white-space: nowrap;
             flex-shrink: 0;
+            font-family: "Geist Mono", monospace;
         }
 
-        .copy-btn:hover { background: #3f3f46; color: #e4e4e7; }
-        .copy-btn.copied { background: #059669; border-color: #059669; color: #fff; }
+        .copy-btn:hover { background: oklch(0.28 0.01 250); color: oklch(0.85 0.01 250); }
+        .copy-btn.copied { background: oklch(0.55 0.14 160); border-color: oklch(0.55 0.14 160); color: oklch(1.000 0.000 0); }
 
         /* Tags */
         .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
         .tag {
-            padding: 3px 10px;
+            padding: 2px 9px;
             border-radius: 9999px;
-            font-size: 0.7rem;
+            font-size: 0.66rem;
             font-weight: 500;
-            background: var(--accent-soft);
-            color: var(--accent);
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-family: "Geist Mono", monospace;
         }
 
-        /* ===== BENTO FEATURE GRID ===== */
+        /* ===== BENTO GRID ===== */
         .bento {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: auto auto;
-            gap: 16px;
+            gap: 14px;
         }
 
         .bento-item {
-            background: var(--bg-elevated);
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 28px;
-            transition: border-color 0.2s;
+            padding: 24px;
+            transition: border-color 0.2s ease-out;
+            display: flex;
+            flex-direction: column;
         }
 
-        .bento-item:hover { border-color: var(--accent); }
+        .bento-item:hover { border-color: var(--primary); }
 
         .bento-item.span-2 { grid-column: span 2; }
-
-        .bento-label {
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-tertiary);
-            margin-bottom: 8px;
-        }
-
-        .bento-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 6px;
-        }
-
-        .bento-desc {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
 
         /* ===== FOOTER ===== */
         footer {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 32px 24px;
+            padding: 28px clamp(16px, 4vw, 32px);
             border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: var(--text-tertiary);
-            font-size: 0.82rem;
+            color: var(--muted);
+            font-size: 0.78rem;
         }
 
-        footer a { color: var(--text-secondary); }
-        footer a:hover { color: var(--text); text-decoration: none; }
+        footer a { color: var(--muted); font-weight: 500; }
+        footer a:hover { color: var(--ink); text-decoration: none; }
 
-        /* ===== SCROLL REVEAL (CSS only) ===== */
+        /* ===== SCROLL REVEAL ===== */
         .reveal {
             opacity: 0;
-            transform: translateY(20px);
-            animation: revealUp 0.6s ease forwards;
+            transform: translateY(16px);
+            animation: revealUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             animation-timeline: view();
-            animation-range: entry 0% entry 30%;
+            animation-range: entry 0% entry 25%;
         }
 
         @keyframes revealUp {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Fallback for browsers without scroll-driven animations */
         @supports not (animation-timeline: view()) {
-            .reveal {
-                opacity: 1;
-                transform: none;
-            }
+            .reveal { opacity: 1; transform: none; }
         }
 
         /* ===== RESPONSIVE ===== */
@@ -416,15 +431,8 @@
             .hero {
                 grid-template-columns: 1fr;
                 min-height: auto;
-                padding: 48px 24px 40px;
-                gap: 32px;
+                gap: 28px;
             }
-
-            .hero h1 { font-size: 2rem; }
-
-            .hero-stats { grid-template-columns: repeat(3, 1fr); }
-
-            .project-grid { grid-template-columns: 1fr; }
 
             .bento { grid-template-columns: 1fr; }
             .bento-item.span-2 { grid-column: span 1; }
@@ -433,14 +441,15 @@
         }
 
         @media (max-width: 480px) {
-            .hero h1 { font-size: 1.7rem; }
             .hero-cta { flex-direction: column; }
             .btn { justify-content: center; }
+            .project-grid { grid-template-columns: 1fr; }
         }
 
         /* ===== REDUCED MOTION ===== */
         @media (prefers-reduced-motion: reduce) {
             .reveal { animation: none; opacity: 1; transform: none; }
+            .btn:hover { transform: none; }
         }
     </style>
 </head>
@@ -469,7 +478,7 @@
     <div class="hero-visual">
         <div class="hero-card">
             <div><span class="prompt">$</span> <span class="cmd">curl -fsSL .../install.sh | bash</span></div>
-            <div class="output">Installing <span class="highlight">hwjcode</span>...</div>
+            <div class="output">Installing <span class="hl">hwjcode</span>...</div>
             <div class="output">Ready. Run <span class="cmd">hwjcode</span> to start.</div>
         </div>
         <div class="hero-stats">
@@ -551,7 +560,7 @@
         <div class="project-card">
             <div class="card-top">
                 <div class="card-title"><a href="https://github.com/hwj123hwj/custom-skills" target="_blank">Custom Skills</a></div>
-                <span class="card-lang">HTML &middot; 4 Stars</span>
+                <span class="card-lang">HTML · 4 Stars</span>
             </div>
             <p class="card-desc">AI Agent 自定义技能集合，扩展 AI 能力边界</p>
             <div class="install-box">
@@ -583,7 +592,7 @@
     </div>
 </section>
 
-<!-- AUTOMATION + VISUALIZATION (Bento Grid) -->
+<!-- AUTOMATION + VISUALIZATION (Bento) -->
 <section class="section reveal">
     <div class="section-head">
         <h2>自动化与可视化</h2>
@@ -610,7 +619,7 @@
         </div>
         <div class="bento-item">
             <div class="card-top">
-                <div class="card-title"><a href="https://github.com/hwj123hwj/car-ai-platform" target="_blank">赛豆 &middot; 汽车智能分析</a></div>
+                <div class="card-title"><a href="https://github.com/hwj123hwj/car-ai-platform" target="_blank">赛豆 · 汽车智能分析</a></div>
                 <span class="card-lang">HTML</span>
             </div>
             <p class="card-desc">AI 驱动的汽车行业数据分析平台 Demo</p>
