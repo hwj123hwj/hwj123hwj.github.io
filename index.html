@@ -1,664 +1,123 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hwj123hwj - 开源项目</title>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-mono/style.min.css" rel="stylesheet">
-    <style>
-        /* ===== TOKENS (OKLCH) ===== */
-        :root {
-            --primary: oklch(0.55 0.14 250);
-            --primary-soft: oklch(0.95 0.03 250);
-            --bg: oklch(1.000 0.000 0);
-            --surface: oklch(0.97 0.005 250);
-            --ink: oklch(0.13 0.02 250);
-            --muted: oklch(0.50 0.02 250);
-            --accent: oklch(0.58 0.14 160);
-            --accent-soft: oklch(0.94 0.04 160);
-            --border: oklch(0.90 0.01 250);
-            --radius: 10px;
-            --radius-sm: 7px;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --primary: oklch(0.70 0.14 250);
-                --primary-soft: oklch(0.20 0.05 250);
-                --bg: oklch(0.10 0.005 250);
-                --surface: oklch(0.14 0.008 250);
-                --ink: oklch(0.93 0.01 250);
-                --muted: oklch(0.58 0.02 250);
-                --accent: oklch(0.72 0.14 160);
-                --accent-soft: oklch(0.20 0.04 160);
-                --border: oklch(0.22 0.01 250);
-            }
-        }
-
-        /* ===== RESET ===== */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: "Geist Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--ink);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        a { color: var(--primary); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        /* ===== NAV ===== */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: var(--bg);
-            border-bottom: 1px solid var(--border);
-            padding: 0 clamp(16px, 4vw, 32px);
-            height: 56px;
-            display: flex;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .nav-name {
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--ink);
-            font-family: "Geist Mono", monospace;
-            letter-spacing: -0.02em;
-        }
-
-        .nav-links { margin-left: auto; display: flex; gap: 20px; }
-        .nav-links a {
-            font-size: 0.82rem;
-            color: var(--muted);
-            transition: color 0.2s ease-out;
-            font-weight: 500;
-        }
-        .nav-links a:hover { color: var(--ink); text-decoration: none; }
-
-        /* ===== HERO (Asymmetric Split) ===== */
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: clamp(48px, 8vw, 96px) clamp(16px, 4vw, 32px) clamp(40px, 6vw, 72px);
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: clamp(32px, 5vw, 64px);
-            align-items: center;
-            min-height: 60vh;
-        }
-
-        .hero-text { max-width: 540px; }
-
-        .hero-eyebrow {
-            font-size: 0.72rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--primary);
-            margin-bottom: 14px;
-            font-family: "Geist Mono", monospace;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.4rem);
-            font-weight: 800;
-            line-height: 1.08;
-            letter-spacing: -0.03em;
-            color: var(--ink);
-            margin-bottom: 20px;
-            text-wrap: balance;
-        }
-
-        .hero-sub {
-            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-            color: var(--muted);
-            line-height: 1.7;
-            margin-bottom: 32px;
-            max-width: 44ch;
-        }
-
-        .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 11px 22px;
-            border-radius: 9px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            transition: all 0.2s ease-out;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: var(--ink);
-            color: var(--bg);
-        }
-
-        .btn-primary:hover {
-            opacity: 0.85;
-            text-decoration: none;
-            transform: translateY(-1px);
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--ink);
-            border: 1px solid var(--border);
-        }
-
-        .btn-ghost:hover {
-            border-color: var(--muted);
-            text-decoration: none;
-        }
-
-        /* Hero visual */
-        .hero-visual {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .hero-card {
-            background: oklch(0.14 0.01 250);
-            border-radius: var(--radius);
-            padding: 20px 22px;
-            color: oklch(0.85 0.01 250);
-            font-family: "Geist Mono", monospace;
-            font-size: 0.78rem;
-            line-height: 1.9;
-            border: 1px solid oklch(0.22 0.01 250);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .hero-card {
-                background: oklch(0.18 0.01 250);
-                border-color: oklch(0.26 0.01 250);
-            }
-        }
-
-        .hero-card .prompt { color: oklch(0.45 0.02 250); }
-        .hero-card .cmd { color: oklch(0.75 0.12 250); }
-        .hero-card .output { color: oklch(0.65 0.02 250); }
-        .hero-card .hl { color: oklch(0.75 0.14 160); }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .stat-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 14px;
-            text-align: center;
-            transition: border-color 0.2s ease-out;
-        }
-
-        .stat-card:hover { border-color: var(--primary); }
-
-        .stat-num {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--ink);
-            letter-spacing: -0.02em;
-            font-family: "Geist Mono", monospace;
-        }
-
-        .stat-label {
-            font-size: 0.72rem;
-            color: var(--muted);
-            margin-top: 2px;
-            font-weight: 500;
-        }
-
-        /* ===== SECTIONS ===== */
-        .section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: clamp(48px, 6vw, 72px) clamp(16px, 4vw, 32px);
-        }
-
-        .section + .section { border-top: 1px solid var(--border); }
-
-        .section-head {
-            margin-bottom: 36px;
-        }
-
-        .section-head h2 {
-            font-size: clamp(1.3rem, 2.5vw, 1.7rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--ink);
-            text-wrap: balance;
-        }
-
-        .section-head p {
-            color: var(--muted);
-            margin-top: 6px;
-            font-size: 0.9rem;
-            max-width: 55ch;
-        }
-
-        /* ===== PROJECT CARDS ===== */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 14px;
-        }
-
-        .project-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 22px;
-            transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 1px var(--primary);
-        }
-
-        .card-top {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .card-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--ink);
-            letter-spacing: -0.01em;
-        }
-
-        .card-title a { color: inherit; }
-        .card-title a:hover { color: var(--primary); text-decoration: none; }
-
-        .card-lang {
-            font-size: 0.72rem;
-            color: var(--muted);
-            font-weight: 500;
-            white-space: nowrap;
-            font-family: "Geist Mono", monospace;
-        }
-
-        .card-desc {
-            font-size: 0.85rem;
-            color: var(--muted);
-            line-height: 1.6;
-            margin-bottom: 14px;
-            flex: 1;
-            max-width: 55ch;
-        }
-
-        /* Install box */
-        .install-box {
-            background: oklch(0.14 0.01 250);
-            border-radius: var(--radius-sm);
-            padding: 10px 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .install-box {
-                background: oklch(0.18 0.01 250);
-            }
-        }
-
-        .install-box code {
-            flex: 1;
-            font-family: "Geist Mono", monospace;
-            font-size: 0.68rem;
-            color: oklch(0.65 0.02 250);
-            overflow-x: auto;
-            white-space: nowrap;
-            scrollbar-width: none;
-        }
-
-        .install-box code::-webkit-scrollbar { display: none; }
-
-        .copy-btn {
-            padding: 3px 9px;
-            background: oklch(0.22 0.01 250);
-            border: 1px solid oklch(0.30 0.01 250);
-            border-radius: 5px;
-            color: oklch(0.65 0.02 250);
-            cursor: pointer;
-            font-size: 0.66rem;
-            font-weight: 500;
-            transition: all 0.15s ease-out;
-            white-space: nowrap;
-            flex-shrink: 0;
-            font-family: "Geist Mono", monospace;
-        }
-
-        .copy-btn:hover { background: oklch(0.28 0.01 250); color: oklch(0.85 0.01 250); }
-        .copy-btn.copied { background: oklch(0.55 0.14 160); border-color: oklch(0.55 0.14 160); color: oklch(1.000 0.000 0); }
-
-        /* Tags */
-        .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-
-        .tag {
-            padding: 2px 9px;
-            border-radius: 9999px;
-            font-size: 0.66rem;
-            font-weight: 500;
-            background: var(--primary-soft);
-            color: var(--primary);
-            font-family: "Geist Mono", monospace;
-        }
-
-        /* ===== BENTO GRID ===== */
-        .bento {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-        }
-
-        .bento-item {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px;
-            transition: border-color 0.2s ease-out;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .bento-item:hover { border-color: var(--primary); }
-
-        .bento-item.span-2 { grid-column: span 2; }
-
-        /* ===== FOOTER ===== */
-        footer {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 28px clamp(16px, 4vw, 32px);
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--muted);
-            font-size: 0.78rem;
-        }
-
-        footer a { color: var(--muted); font-weight: 500; }
-        footer a:hover { color: var(--ink); text-decoration: none; }
-
-        /* ===== SCROLL REVEAL ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(16px);
-            animation: revealUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-timeline: view();
-            animation-range: entry 0% entry 25%;
-        }
-
-        @keyframes revealUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @supports not (animation-timeline: view()) {
-            .reveal { opacity: 1; transform: none; }
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .hero {
-                grid-template-columns: 1fr;
-                min-height: auto;
-                gap: 28px;
-            }
-
-            .bento { grid-template-columns: 1fr; }
-            .bento-item.span-2 { grid-column: span 1; }
-
-            footer { flex-direction: column; gap: 8px; text-align: center; }
-        }
-
-        @media (max-width: 480px) {
-            .hero-cta { flex-direction: column; }
-            .btn { justify-content: center; }
-            .project-grid { grid-template-columns: 1fr; }
-        }
-
-        /* ===== REDUCED MOTION ===== */
-        @media (prefers-reduced-motion: reduce) {
-            .reveal { animation: none; opacity: 1; transform: none; }
-            .btn:hover { transform: none; }
-        }
-    </style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-    <span class="nav-name">hwj123hwj</span>
-    <div class="nav-links">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Hwj AI Infrastructure：统一网关、Agent 编排与知识飞轮的公开状态页。"
+    />
+    <meta name="theme-color" content="#0b1412" />
+    <title>Hwj AI Infrastructure</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">跳到正文</a>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true">H</span>
+        <span>Hwj Infrastructure</span>
+      </a>
+      <nav aria-label="主导航">
+        <a href="#architecture">架构</a>
         <a href="#projects">项目</a>
-        <a href="https://github.com/hwj123hwj" target="_blank">GitHub</a>
-    </div>
-</nav>
+        <a href="#initiative">目标</a>
+        <a href="https://github.com/hwj123hwj">GitHub ↗</a>
+      </nav>
+    </header>
 
-<!-- HERO -->
-<header class="hero">
-    <div class="hero-text">
-        <div class="hero-eyebrow">全栈开发者</div>
-        <h1>用代码构建<br>实用工具</h1>
-        <p class="hero-sub">Go / TypeScript / Python，专注 AI 工具链与自动化。每个项目都有一行安装命令。</p>
-        <div class="hero-cta">
-            <a href="#projects" class="btn btn-primary">查看项目</a>
-            <a href="https://github.com/hwj123hwj?tab=repositories" target="_blank" class="btn btn-ghost">所有仓库</a>
-        </div>
-    </div>
-    <div class="hero-visual">
-        <div class="hero-card">
-            <div><span class="prompt">$</span> <span class="cmd">curl -fsSL .../install.sh | bash</span></div>
-            <div class="output">Installing <span class="hl">hwjcode</span>...</div>
-            <div class="output">Ready. Run <span class="cmd">hwjcode</span> to start.</div>
-        </div>
-        <div class="hero-stats">
-            <div class="stat-card">
-                <div class="stat-num">8</div>
-                <div class="stat-label">公开项目</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-num">4</div>
-                <div class="stat-label">语言</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-num">7</div>
-                <div class="stat-label">Stars</div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- AI TOOLS -->
-<section class="section reveal" id="projects">
-    <div class="section-head">
-        <h2>AI 工具链</h2>
-        <p>编程助手、Agent 框架、技能系统</p>
-    </div>
-    <div class="project-grid">
-
-        <div class="project-card">
-            <div class="card-top">
-                <div class="card-title"><a href="https://github.com/hwj123hwj/litellm-gateway" target="_blank">LLM Gateway</a></div>
-                <span class="card-lang">Go</span>
-            </div>
-            <p class="card-desc">轻量级 LLM API 网关，18MB 内存占用，支持智谱 / 小米 / 美团 / EasyClaw，自动 fallback</p>
-            <div class="install-box">
-                <code>curl -fsSL https://raw.githubusercontent.com/hwj123hwj/litellm-gateway/main/scripts/install.sh | bash</code>
-                <button class="copy-btn" onclick="copyInstall(this)">复制</button>
-            </div>
-            <div class="tags">
-                <span class="tag">API Gateway</span>
-                <span class="tag">LLM</span>
-                <span class="tag">OpenAI 兼容</span>
-            </div>
+    <main id="content">
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Building in public</p>
+          <h1>让每一次 AI 对话，<br /><em>成为下一次的上下文。</em></h1>
+          <p class="hero-lead">
+            一套面向个人长期使用的 AI 基础设施：统一模型入口、可靠路由、Agent 编排，以及能持续生长的知识飞轮。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#initiative">查看当前目标</a>
+            <a class="button button-secondary" href="https://github.com/hwj123hwj/litellm-gateway">探索网关 ↗</a>
+          </div>
         </div>
 
-        <div class="project-card">
-            <div class="card-top">
-                <div class="card-title"><a href="https://github.com/hwj123hwj/pi-go" target="_blank">pi-go</a></div>
-                <span class="card-lang">Go</span>
+        <aside class="release-card" aria-labelledby="release-title">
+          <div class="release-card-head">
+            <div>
+              <p class="card-kicker">Active initiative</p>
+              <h2 id="release-title">统一 AI 对话知识飞轮</h2>
             </div>
-            <p class="card-desc">AI 编程搭档，写代码、搜知识、放音乐，一个终端全搞定</p>
-            <div class="install-box">
-                <code>curl -fsSL https://raw.githubusercontent.com/hwj123hwj/pi-go/main/scripts/install.sh | bash</code>
-                <button class="copy-btn" onclick="copyInstall(this)">复制</button>
-            </div>
-            <div class="tags">
-                <span class="tag">AI Agent</span>
-                <span class="tag">TUI</span>
-                <span class="tag">编程助手</span>
-            </div>
+            <span class="status-pill" id="hero-status">载入中</span>
+          </div>
+          <p id="hero-summary">正在读取公开状态…</p>
+          <div class="progress-copy">
+            <span>验收进度</span>
+            <strong id="progress-label">—</strong>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <span id="progress-bar"></span>
+          </div>
+          <p class="verified-date">最近验证 <time id="verified-at">—</time></p>
+        </aside>
+      </section>
+
+      <section class="architecture section" id="architecture" aria-labelledby="architecture-title">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">One connected system</p>
+            <h2 id="architecture-title">从调用到知识，不再散落</h2>
+          </div>
+          <p>每一层只承担清晰职责，并用可验证的契约连接。网关保留审计线索，知识管道负责脱敏、去重与沉淀。</p>
         </div>
+        <ol class="pipeline" aria-label="AI 知识飞轮处理流程">
+          <li><span>01</span><strong>AI 入口</strong><small>CLI · 飞书 · Agent</small></li>
+          <li><span>02</span><strong>统一网关</strong><small>路由 · fallback · 归档</small></li>
+          <li><span>03</span><strong>知识编译</strong><small>脱敏 · 去重 · 提炼</small></li>
+          <li><span>04</span><strong>索引检索</strong><small>搜索 · 回溯 · 可视化</small></li>
+          <li><span>05</span><strong>反馈增强</strong><small>为下一次对话提供上下文</small></li>
+        </ol>
+      </section>
 
-        <div class="project-card">
-            <div class="card-top">
-                <div class="card-title"><a href="https://github.com/hwj123hwj/hwjcode" target="_blank">HWJCode</a></div>
-                <span class="card-lang">TypeScript</span>
-            </div>
-            <p class="card-desc">飞书原生的 AI 编程 Agent，支持 Worktree 并行开发与自更新</p>
-            <div class="install-box">
-                <code>curl -fsSL https://raw.githubusercontent.com/hwj123hwj/hwjcode/main/scripts/install.sh | bash</code>
-                <button class="copy-btn" onclick="copyInstall(this)">复制</button>
-            </div>
-            <div class="tags">
-                <span class="tag">飞书集成</span>
-                <span class="tag">AI Agent</span>
-                <span class="tag">Worktree</span>
-            </div>
+      <section class="section" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <p class="eyebrow">Project map</p>
+          <h2 id="projects-title">五个组件，一条主线</h2>
+          <p>公开仓库可直接查看源码；内部组件只展示它们在系统中的职责。</p>
         </div>
-
-        <div class="project-card">
-            <div class="card-top">
-                <div class="card-title"><a href="https://github.com/hwj123hwj/custom-skills" target="_blank">Custom Skills</a></div>
-                <span class="card-lang">HTML · 4 Stars</span>
-            </div>
-            <p class="card-desc">AI Agent 自定义技能集合，扩展 AI 能力边界</p>
-            <div class="install-box">
-                <code>git clone https://github.com/hwj123hwj/custom-skills.git</code>
-                <button class="copy-btn" onclick="copyInstall(this)">复制</button>
-            </div>
-            <div class="tags">
-                <span class="tag">AI Skills</span>
-                <span class="tag">Agent</span>
-            </div>
+        <div class="project-grid" id="project-grid" aria-live="polite">
+          <p class="loading">正在载入项目状态…</p>
         </div>
+      </section>
 
-        <div class="project-card">
-            <div class="card-top">
-                <div class="card-title"><a href="https://github.com/hwj123hwj/VibeCheck" target="_blank">VibeCheck</a></div>
-                <span class="card-lang">Python</span>
-            </div>
-            <p class="card-desc">AI 驱动的音乐情感分析与情绪索引平台</p>
-            <div class="install-box">
-                <code>git clone https://github.com/hwj123hwj/VibeCheck.git</code>
-                <button class="copy-btn" onclick="copyInstall(this)">复制</button>
-            </div>
-            <div class="tags">
-                <span class="tag">音乐</span>
-                <span class="tag">情感分析</span>
-            </div>
+      <section class="section initiative" id="initiative" aria-labelledby="initiative-title">
+        <div class="initiative-copy">
+          <p class="eyebrow">Current destination</p>
+          <h2 id="initiative-title">不是“功能很多”，而是飞轮真正闭合</h2>
+          <p id="initiative-summary">
+            候选链路已完成跨项目验证。完成不以文档勾选为准，而以合并、部署与生产环境复测为准。
+          </p>
+          <dl class="metrics">
+            <div><dt>核心组件</dt><dd id="project-count">5</dd></div>
+            <div><dt>验收通过</dt><dd id="acceptance-count">—</dd></div>
+            <div><dt>阶段</dt><dd>Release candidate</dd></div>
+          </dl>
         </div>
-
-    </div>
-</section>
-
-<!-- TOOLS & LEARNING (Bento) -->
-<section class="section reveal">
-    <div class="section-head">
-        <h2>工具与学习</h2>
-        <p>自动化、全栈应用、Go 学习</p>
-    </div>
-    <div class="bento">
-        <div class="bento-item span-2">
-            <div class="card-top">
-                <div class="card-title"><a href="https://github.com/hwj123hwj/WePilot" target="_blank">WePilot</a></div>
-                <span class="card-lang">Python</span>
-            </div>
-            <p class="card-desc">桌面微信自动化工具，RPA 驱动的微信助手</p>
-            <div class="install-box">
-                <code>git clone https://github.com/hwj123hwj/WePilot.git</code>
-                <button class="copy-btn" onclick="copyInstall(this)">复制</button>
-            </div>
+        <div class="release-gates">
+          <h3>公开发布门禁</h3>
+          <ul id="pr-list">
+            <li class="loading">正在载入 Pull Request…</li>
+          </ul>
+          <p class="gate-note">私有项目门禁与详细证据保留在控制仓库，本页面遵循最小披露原则。</p>
         </div>
-        <div class="bento-item">
-            <div class="card-top">
-                <div class="card-title"><a href="https://github.com/hwj123hwj/cc" target="_blank">CC CRM</a></div>
-                <span class="card-lang">TypeScript</span>
-            </div>
-            <p class="card-desc">CRM 管理系统，全栈应用</p>
-        </div>
-        <div class="bento-item">
-            <div class="card-top">
-                <div class="card-title"><a href="https://github.com/hwj123hwj/go-learning-for-java-dev" target="_blank">Go 学习指南</a></div>
-                <span class="card-lang">Go</span>
-            </div>
-            <p class="card-desc">Java 开发者转 Go 语言，基础语法 + Gin+GORM 实战</p>
-            <div class="install-box">
-                <code>git clone https://github.com/hwj123hwj/go-learning-for-java-dev.git</code>
-                <button class="copy-btn" onclick="copyInstall(this)">复制</button>
-            </div>
-        </div>
-    </div>
-</section>
+      </section>
+    </main>
 
-<!-- FOOTER -->
-<footer>
-    <span>&copy; 2026 hwj123hwj</span>
-    <div>
-        <a href="https://github.com/hwj123hwj" target="_blank">GitHub</a>
-    </div>
-</footer>
+    <footer>
+      <p>Hwj AI Infrastructure <span aria-hidden="true">·</span> Evidence before status.</p>
+      <p>公开状态更新于 <time id="generated-at">—</time></p>
+    </footer>
 
-<script>
-    function copyInstall(btn) {
-        const code = btn.parentElement.querySelector('code');
-        navigator.clipboard.writeText(code.textContent).then(() => {
-            btn.textContent = '已复制';
-            btn.classList.add('copied');
-            setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 2000);
-        }).catch(() => {
-            const ta = document.createElement('textarea');
-            ta.value = code.textContent;
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-            btn.textContent = '已复制';
-            btn.classList.add('copied');
-            setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 2000);
-        });
-    }
-</script>
-
-</body>
+    <noscript>此页面需要 JavaScript 读取静态状态文件；项目源码仍可在 GitHub 查看。</noscript>
+  </body>
 </html>
