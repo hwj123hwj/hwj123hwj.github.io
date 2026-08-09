@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-10",
+  "initiative": {
+    "id": "data-flywheel",
+    "title": "统一 AI 对话知识飞轮",
+    "status": "release-candidate",
+    "summary": "候选链路已完成真实模型与跨项目 E2E，正在等待合并与部署后复测。",
+    "last_verified": "2026-08-10",
+    "acceptance": {
+      "passed": 9,
+      "total": 12
+    },
+    "public_pull_requests": [
+      {
+        "repository": "litellm-gateway",
+        "number": 27,
+        "url": "https://github.com/hwj123hwj/litellm-gateway/pull/27",
+        "state": "ready"
+      },
+      {
+        "repository": "hwjcode",
+        "number": 37,
+        "url": "https://github.com/hwj123hwj/hwjcode/pull/37",
+        "state": "ready"
+      },
+      {
+        "repository": "hwjcode",
+        "number": 38,
+        "url": "https://github.com/hwj123hwj/hwjcode/pull/38",
+        "state": "ready"
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": "hwjcode",
+      "name": "HwjCode",
+      "role": "个人 AI 工作台、CLI/飞书入口与跨 Agent 编排层",
+      "status": "release-candidate",
+      "visibility": "public",
+      "repository_url": "https://github.com/hwj123hwj/hwjcode"
+    },
+    {
+      "id": "litellm-gateway",
+      "name": "LLM Gateway",
+      "role": "统一模型 API、认证、能力路由、fallback、归档与可观测性",
+      "status": "release-candidate",
+      "visibility": "public",
+      "repository_url": "https://github.com/hwj123hwj/litellm-gateway"
+    },
+    {
+      "id": "agent-lessons",
+      "name": "Knowledge Compiler",
+      "role": "多源对话同步、去重、编译与反馈环隔离",
+      "status": "release-candidate",
+      "visibility": "private",
+      "repository_url": null
+    },
+    {
+      "id": "hwj-wiki",
+      "name": "Knowledge Index",
+      "role": "个人知识库编译、索引、检索与可视化",
+      "status": "release-candidate",
+      "visibility": "private",
+      "repository_url": null
+    },
+    {
+      "id": "pi-go",
+      "name": "pi-go",
+      "role": "底层 Agent 与项目知识能力",
+      "status": "integrated",
+      "visibility": "public",
+      "repository_url": "https://github.com/hwj123hwj/pi-go"
+    }
+  ]
+}
