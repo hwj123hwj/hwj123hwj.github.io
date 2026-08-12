@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-10",
+  "generated_at": "2026-08-12",
   "initiative": {
     "id": "data-flywheel",
     "title": "统一 AI 对话知识飞轮",
     "status": "release-candidate",
-    "summary": "候选链路已完成真实模型与跨项目 E2E，正在等待合并与部署后复测。",
-    "last_verified": "2026-08-10",
+    "summary": "5 个飞轮仓库的发布门禁 PR 已全部合并；本地链路已恢复。正在等待真实模型 E2E 复测与凭证轮换。",
+    "last_verified": "2026-08-12",
     "acceptance": {
-      "passed": 9,
+      "passed": 11,
       "total": 12
     },
     "public_pull_requests": [
@@ -16,19 +16,19 @@
         "repository": "litellm-gateway",
         "number": 27,
         "url": "https://github.com/hwj123hwj/litellm-gateway/pull/27",
-        "state": "ready"
+        "state": "merged"
       },
       {
         "repository": "hwjcode",
         "number": 37,
         "url": "https://github.com/hwj123hwj/hwjcode/pull/37",
-        "state": "ready"
+        "state": "merged"
       },
       {
         "repository": "hwjcode",
         "number": 38,
         "url": "https://github.com/hwj123hwj/hwjcode/pull/38",
-        "state": "ready"
+        "state": "merged"
       }
     ]
   },
