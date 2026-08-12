@@ -39,6 +39,7 @@
       "role": "个人 AI 工作台、CLI/飞书入口与跨 Agent 编排层",
       "status": "release-candidate",
       "visibility": "public",
+      "category": null,
       "repository_url": "https://github.com/hwj123hwj/hwjcode"
     },
     {
@@ -47,6 +48,7 @@
       "role": "统一模型 API、认证、能力路由、fallback、归档与可观测性",
       "status": "release-candidate",
       "visibility": "public",
+      "category": null,
       "repository_url": "https://github.com/hwj123hwj/litellm-gateway"
     },
     {
@@ -55,6 +57,7 @@
       "role": "多源对话同步、去重、编译与反馈环隔离",
       "status": "release-candidate",
       "visibility": "private",
+      "category": null,
       "repository_url": null
     },
     {
@@ -63,6 +66,7 @@
       "role": "个人知识库编译、索引、检索与可视化",
       "status": "release-candidate",
       "visibility": "public",
+      "category": null,
       "repository_url": "https://github.com/hwj123hwj/hwj-wiki"
     },
     {
@@ -71,7 +75,62 @@
       "role": "底层 Agent 与项目知识能力",
       "status": "integrated",
       "visibility": "public",
+      "category": null,
       "repository_url": "https://github.com/hwj123hwj/pi-go"
+    },
+    {
+      "id": "custom-skills",
+      "name": "custom-skills",
+      "role": "AI Agent 自定义 Skill 集合，沉淀可复用的工具能力",
+      "status": "active",
+      "visibility": "public",
+      "category": "portfolio",
+      "repository_url": "https://github.com/hwj123hwj/custom-skills"
+    },
+    {
+      "id": "open-kimi-ppt-skill",
+      "name": "open-kimi-ppt-skill",
+      "role": "Kimi 幻灯片 Skill：让 Agent 生成可编辑 PPTD + PPTX，附本地浏览器编辑器",
+      "status": "active",
+      "visibility": "public",
+      "category": "portfolio",
+      "repository_url": "https://github.com/hwj123hwj/open-kimi-ppt-skill"
+    },
+    {
+      "id": "rust-smart-pot",
+      "name": "rust-smart-pot",
+      "role": "基于 ESP32 + Rust 的物联网智能植物养护系统",
+      "status": "active",
+      "visibility": "public",
+      "category": "portfolio",
+      "repository_url": "https://github.com/hwj123hwj/rust-smart-pot"
+    },
+    {
+      "id": "pi-extensions",
+      "name": "pi-extensions",
+      "role": "Pi 编码 Agent 的生产级扩展，从飞书集成起步",
+      "status": "active",
+      "visibility": "public",
+      "category": "portfolio",
+      "repository_url": "https://github.com/hwj123hwj/pi-extensions"
+    },
+    {
+      "id": "WePilot",
+      "name": "WePilot",
+      "role": "桌面微信 RPA，微信客户端自动化",
+      "status": "active",
+      "visibility": "public",
+      "category": "portfolio",
+      "repository_url": "https://github.com/hwj123hwj/WePilot"
+    },
+    {
+      "id": "go-learning-for-java-dev",
+      "name": "go-learning-for-java-dev",
+      "role": "面向 Java 开发者的 Go 学习路径与 Gin+GORM Web 实战",
+      "status": "active",
+      "visibility": "public",
+      "category": "portfolio",
+      "repository_url": "https://github.com/hwj123hwj/go-learning-for-java-dev"
     }
   ]
 }

@@ -13,13 +13,21 @@ function makeElement(tag, className, text) {
   return element;
 }
 
-function renderProjects(projects) {
-  const grid = document.querySelector("#project-grid");
+function renderProjects(projects, containerSelector = "#project-grid", numbered = true) {
+  const grid = document.querySelector(containerSelector);
+  if (!grid) return;
   grid.replaceChildren();
+
+  if (projects.length === 0) {
+    grid.append(makeElement("p", "loading", "暂无项目。"));
+    return;
+  }
 
   projects.forEach((project, index) => {
     const card = makeElement("article", "project-card");
-    card.append(makeElement("span", "project-number", String(index + 1).padStart(2, "0")));
+    if (numbered) {
+      card.append(makeElement("span", "project-number", String(index + 1).padStart(2, "0")));
+    }
 
     const heading = makeElement("h3");
     if (project.repository_url) {
@@ -78,10 +86,13 @@ async function loadStatus() {
   document.querySelector("#verified-at").dateTime = initiative.last_verified;
   document.querySelector("#generated-at").textContent = status.generated_at;
   document.querySelector("#generated-at").dateTime = status.generated_at;
-  document.querySelector("#project-count").textContent = status.projects.length;
+  const infraProjects = status.projects.filter((p) => p.category !== "portfolio");
+  const portfolioProjects = status.projects.filter((p) => p.category === "portfolio");
+  document.querySelector("#project-count").textContent = infraProjects.length;
   document.querySelector("#acceptance-count").textContent = `${percent}%`;
 
-  renderProjects(status.projects);
+  renderProjects(infraProjects);
+  renderProjects(portfolioProjects, "#portfolio-grid", false);
   renderPullRequests(initiative.public_pull_requests);
 }
 
@@ -92,6 +103,10 @@ loadStatus().catch((error) => {
   document.querySelector("#project-grid").replaceChildren(
     makeElement("p", "loading", "项目状态暂时无法载入。"),
   );
+  const portfolioGrid = document.querySelector("#portfolio-grid");
+  if (portfolioGrid) {
+    portfolioGrid.replaceChildren(makeElement("p", "loading", "项目状态暂时无法载入。"));
+  }
   document.querySelector("#pr-list").replaceChildren(
     makeElement("li", "loading", "发布门禁暂时无法载入。"),
   );
