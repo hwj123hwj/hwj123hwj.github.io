@@ -1,5 +1,9 @@
 # Hwj AI Infrastructure
 
+> 🌐 **线上访问：<https://hwj123hwj.github.io/>**
+>
+> 由 GitHub Pages 托管，`main` 分支推送后自动部署。
+
 `hwj123hwj.github.io` 是跨项目基础设施的公开状态页，展示公开仓库、当前主目标和经过脱敏的发布进度。
 
 ## 数据边界
