@@ -62,8 +62,8 @@
       "name": "Knowledge Index",
       "role": "个人知识库编译、索引、检索与可视化",
       "status": "release-candidate",
-      "visibility": "private",
-      "repository_url": null
+      "visibility": "public",
+      "repository_url": "https://github.com/hwj123hwj/hwj-wiki"
     },
     {
       "id": "pi-go",
