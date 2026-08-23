@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-12",
+  "generated_at": "2026-08-23",
   "initiative": {
     "id": "data-flywheel",
     "title": "统一 AI 对话知识飞轮",
@@ -40,7 +40,10 @@
       "status": "release-candidate",
       "visibility": "public",
       "category": null,
-      "repository_url": "https://github.com/hwj123hwj/hwjcode"
+      "repository_url": "https://github.com/hwj123hwj/hwjcode",
+      "stars": 0,
+      "language": "TypeScript",
+      "last_pushed_at": "2026-08-16"
     },
     {
       "id": "litellm-gateway",
@@ -49,7 +52,10 @@
       "status": "release-candidate",
       "visibility": "public",
       "category": null,
-      "repository_url": "https://github.com/hwj123hwj/litellm-gateway"
+      "repository_url": "https://github.com/hwj123hwj/litellm-gateway",
+      "stars": 0,
+      "language": "Go",
+      "last_pushed_at": "2026-08-19"
     },
     {
       "id": "agent-lessons",
@@ -67,7 +73,10 @@
       "status": "release-candidate",
       "visibility": "public",
       "category": null,
-      "repository_url": "https://github.com/hwj123hwj/hwj-wiki"
+      "repository_url": "https://github.com/hwj123hwj/hwj-wiki",
+      "stars": 0,
+      "language": "TypeScript",
+      "last_pushed_at": "2026-08-17"
     },
     {
       "id": "pi-go",
@@ -76,7 +85,10 @@
       "status": "integrated",
       "visibility": "public",
       "category": null,
-      "repository_url": "https://github.com/hwj123hwj/pi-go"
+      "repository_url": "https://github.com/hwj123hwj/pi-go",
+      "stars": 3,
+      "language": "Go",
+      "last_pushed_at": "2026-08-10"
     },
     {
       "id": "custom-skills",
@@ -85,7 +97,10 @@
       "status": "active",
       "visibility": "public",
       "category": "portfolio",
-      "repository_url": "https://github.com/hwj123hwj/custom-skills"
+      "repository_url": "https://github.com/hwj123hwj/custom-skills",
+      "stars": 4,
+      "language": "JavaScript",
+      "last_pushed_at": "2026-08-23"
     },
     {
       "id": "open-kimi-ppt-skill",
@@ -94,7 +109,10 @@
       "status": "active",
       "visibility": "public",
       "category": "portfolio",
-      "repository_url": "https://github.com/hwj123hwj/open-kimi-ppt-skill"
+      "repository_url": "https://github.com/hwj123hwj/open-kimi-ppt-skill",
+      "stars": 0,
+      "language": "Python",
+      "last_pushed_at": "2026-08-10"
     },
     {
       "id": "rust-smart-pot",
@@ -103,7 +121,10 @@
       "status": "active",
       "visibility": "public",
       "category": "portfolio",
-      "repository_url": "https://github.com/hwj123hwj/rust-smart-pot"
+      "repository_url": "https://github.com/hwj123hwj/rust-smart-pot",
+      "stars": 0,
+      "language": null,
+      "last_pushed_at": "2026-08-01"
     },
     {
       "id": "pi-extensions",
@@ -112,7 +133,10 @@
       "status": "active",
       "visibility": "public",
       "category": "portfolio",
-      "repository_url": "https://github.com/hwj123hwj/pi-extensions"
+      "repository_url": "https://github.com/hwj123hwj/pi-extensions",
+      "stars": 0,
+      "language": "TypeScript",
+      "last_pushed_at": "2026-08-01"
     },
     {
       "id": "WePilot",
@@ -121,7 +145,10 @@
       "status": "active",
       "visibility": "public",
       "category": "portfolio",
-      "repository_url": "https://github.com/hwj123hwj/WePilot"
+      "repository_url": "https://github.com/hwj123hwj/WePilot",
+      "stars": 1,
+      "language": "Python",
+      "last_pushed_at": "2026-06-26"
     },
     {
       "id": "go-learning-for-java-dev",
@@ -130,7 +157,46 @@
       "status": "active",
       "visibility": "public",
       "category": "portfolio",
-      "repository_url": "https://github.com/hwj123hwj/go-learning-for-java-dev"
+      "repository_url": "https://github.com/hwj123hwj/go-learning-for-java-dev",
+      "stars": 0,
+      "language": "Go",
+      "last_pushed_at": "2026-06-02"
+    },
+    {
+      "id": "palmier-pro",
+      "name": "palmier-pro",
+      "role": "macOS video editor built for AI",
+      "status": "active",
+      "visibility": "public",
+      "category": "portfolio",
+      "repository_url": "https://github.com/hwj123hwj/palmier-pro",
+      "stars": 0,
+      "language": "Swift",
+      "last_pushed_at": "2026-08-23"
+    },
+    {
+      "id": "k8s-learn",
+      "name": "k8s-learn",
+      "role": "Kubernetes 学习沙盒 - 本地实践环境",
+      "status": "active",
+      "visibility": "public",
+      "category": "portfolio",
+      "repository_url": "https://github.com/hwj123hwj/k8s-learn",
+      "stars": 0,
+      "language": "JavaScript",
+      "last_pushed_at": "2026-08-18"
+    },
+    {
+      "id": "deepseek-harness",
+      "name": "deepseek-harness",
+      "role": "DeepSeek Harness: Everything is a Plugin.",
+      "status": "active",
+      "visibility": "public",
+      "category": "portfolio",
+      "repository_url": "https://github.com/hwj123hwj/deepseek-harness",
+      "stars": 0,
+      "language": null,
+      "last_pushed_at": "2026-08-13"
     }
   ]
 }

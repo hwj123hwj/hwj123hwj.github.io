@@ -47,6 +47,20 @@ function renderProjects(projects, containerSelector = "#project-grid", numbered 
         `${statusLabels[project.status] || project.status} · ${project.visibility === "public" ? "Open source" : "Internal"}`,
       ),
     );
+
+    if (project.language) {
+      const langSpan = makeElement("span", "meta-badge", project.language);
+      meta.append(langSpan);
+    }
+    if (typeof project.stars === "number" && project.stars > 0) {
+      const starSpan = makeElement("span", "meta-badge", `★ ${project.stars}`);
+      meta.append(starSpan);
+    }
+    if (project.last_pushed_at) {
+      const pushedSpan = makeElement("span", "meta-date", project.last_pushed_at);
+      meta.append(pushedSpan);
+    }
+
     card.append(meta);
     grid.append(card);
   });

@@ -214,8 +214,10 @@ h1 em { color: var(--green); font-style: normal; }
 .project-number { color: var(--green); font: 700 12px/1 ui-monospace, monospace; }
 .project-card h3 { margin: auto 0 8px; font-size: 25px; letter-spacing: -0.04em; }
 .project-card p { margin: 0; color: var(--muted); font-size: 14px; }
-.project-meta { display: flex; align-items: center; gap: 8px; margin-top: 22px; font: 700 11px/1 ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+.project-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; font: 700 11px/1 ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.08em; }
 .project-meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+.meta-badge { padding: 3px 6px; border-radius: 4px; background: rgba(15, 107, 81, 0.1); color: var(--green); font-size: 10px; }
+.meta-date { color: var(--muted); font-size: 10px; font-weight: normal; margin-left: auto; text-transform: none; }
 .project-card a { text-decoration: none; }
 .project-card a:hover { color: var(--green); }
 .loading { color: var(--muted); }
