@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23",
+  "generated_at": "2026-08-24",
   "initiative": {
     "id": "data-flywheel",
     "title": "统一 AI 对话知识飞轮",
@@ -43,7 +43,7 @@
       "repository_url": "https://github.com/hwj123hwj/hwjcode",
       "stars": 0,
       "language": "TypeScript",
-      "last_pushed_at": "2026-08-16"
+      "last_pushed_at": "2026-08-23"
     },
     {
       "id": "litellm-gateway",
@@ -76,7 +76,7 @@
       "repository_url": "https://github.com/hwj123hwj/hwj-wiki",
       "stars": 0,
       "language": "TypeScript",
-      "last_pushed_at": "2026-08-17"
+      "last_pushed_at": "2026-08-23"
     },
     {
       "id": "pi-go",
