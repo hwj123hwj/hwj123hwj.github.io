@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24",
+  "generated_at": "2026-08-25",
   "initiative": {
     "id": "data-flywheel",
     "title": "统一 AI 对话知识飞轮",
@@ -55,7 +55,7 @@
       "repository_url": "https://github.com/hwj123hwj/litellm-gateway",
       "stars": 0,
       "language": "Go",
-      "last_pushed_at": "2026-08-19"
+      "last_pushed_at": "2026-08-24"
     },
     {
       "id": "agent-lessons",
@@ -100,7 +100,7 @@
       "repository_url": "https://github.com/hwj123hwj/custom-skills",
       "stars": 4,
       "language": "JavaScript",
-      "last_pushed_at": "2026-08-23"
+      "last_pushed_at": "2026-08-24"
     },
     {
       "id": "open-kimi-ppt-skill",
