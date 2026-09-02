@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-01",
+  "generated_at": "2026-09-02",
   "initiative": {
     "id": "data-flywheel",
     "title": "统一 AI 对话知识飞轮",
@@ -76,7 +76,7 @@
       "repository_url": "https://github.com/hwj123hwj/hwj-wiki",
       "stars": 0,
       "language": "TypeScript",
-      "last_pushed_at": "2026-08-23"
+      "last_pushed_at": "2026-09-01"
     },
     {
       "id": "pi-go",
@@ -100,7 +100,7 @@
       "repository_url": "https://github.com/hwj123hwj/custom-skills",
       "stars": 4,
       "language": "JavaScript",
-      "last_pushed_at": "2026-08-31"
+      "last_pushed_at": "2026-09-01"
     },
     {
       "id": "open-kimi-ppt-skill",
@@ -172,7 +172,7 @@
       "repository_url": "https://github.com/hwj123hwj/palmier-pro",
       "stars": 0,
       "language": "Swift",
-      "last_pushed_at": "2026-08-23"
+      "last_pushed_at": "2026-09-01"
     },
     {
       "id": "k8s-learn",
