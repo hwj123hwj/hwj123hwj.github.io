@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-05",
+  "generated_at": "2026-09-06",
   "initiative": {
     "id": "data-flywheel",
     "title": "统一 AI 对话知识飞轮",
@@ -100,7 +100,7 @@
       "repository_url": "https://github.com/hwj123hwj/custom-skills",
       "stars": 4,
       "language": "JavaScript",
-      "last_pushed_at": "2026-09-04"
+      "last_pushed_at": "2026-09-06"
     },
     {
       "id": "open-kimi-ppt-skill",
@@ -208,7 +208,7 @@
       "repository_url": "https://github.com/hwj123hwj/easycode-skills",
       "stars": 0,
       "language": "Python",
-      "last_pushed_at": "2026-09-03"
+      "last_pushed_at": "2026-09-06"
     }
   ]
 }
