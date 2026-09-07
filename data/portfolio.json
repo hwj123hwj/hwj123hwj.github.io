@@ -1,0 +1,62 @@
+{
+  "featured": [
+    "hwjcode",
+    "hwj-wiki",
+    "go-learning-for-java-dev"
+  ],
+  "projects": {
+    "hwjcode": {
+      "kind": "fork",
+      "label": "Agent 协作",
+      "problem": "把编码任务从本地终端带到飞书协作现场。",
+      "contribution": "基于 Easy Code 改造，增加飞书入口、Worktree 并行隔离和个人版更新链路。",
+      "proof": "查看集成方式与使用示例",
+      "proof_url": "https://github.com/hwj123hwj/hwjcode#readme"
+    },
+    "hwj-wiki": {
+      "kind": "fork",
+      "label": "项目知识",
+      "problem": "让项目经验能被下一次开发找回、复核和复用。",
+      "contribution": "基于 OpenWiki 改造，围绕个人项目增加知识整理、索引与上下文工作流，保留上游文档生成能力。",
+      "proof": "查看知识工具源码",
+      "proof_url": "https://github.com/hwj123hwj/hwj-wiki"
+    },
+    "go-learning-for-java-dev": {
+      "kind": "learning",
+      "label": "交互教学",
+      "problem": "帮助 Java 开发者把熟悉的后端经验迁移到 Go。",
+      "contribution": "组织九阶段课程、练习与答案，用并发和迷你 LLM 网关串起语法、工程习惯与实战。",
+      "proof": "打开交互学习实验室",
+      "proof_url": "https://hwj123hwj.github.io/go-learning-for-java-dev/"
+    },
+    "palmier-pro": {
+      "kind": "fork",
+      "label": "本地视频工具",
+      "contribution": "基于 Palmier Pro 的个人改造：移除商业账号层，接入浏览器生成与本地工作流。时间线编辑器来自上游。"
+    },
+    "k8s-learn": {
+      "kind": "learning"
+    },
+    "litellm-gateway": {
+      "kind": "tool"
+    },
+    "pi-go": {
+      "kind": "tool"
+    },
+    "custom-skills": {
+      "kind": "tool"
+    },
+    "open-kimi-ppt-skill": {
+      "kind": "tool"
+    },
+    "pi-extensions": {
+      "kind": "tool"
+    },
+    "WePilot": {
+      "kind": "tool"
+    },
+    "easycode-skills": {
+      "kind": "tool"
+    }
+  }
+}

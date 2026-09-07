@@ -1,127 +1,138 @@
 const statusLabels = {
-  "release-candidate": "候选已验证",
-  integrated: "已接入",
-  verified: "已验证",
-  active: "进行中",
-  planned: "计划中",
+  'release-candidate': '候选已验证', integrated: '已接入', verified: '已验证',
+  active: '进行中', planned: '计划中',
 };
-
-function makeElement(tag, className, text) {
-  const element = document.createElement(tag);
-  if (className) element.className = className;
-  if (text !== undefined) element.textContent = text;
-  return element;
+const kindLabels = { tool: '工具作品', learning: '教学实践', fork: '上游改造', other: '其他探索' };
+const prLabels = { merged: '已合并', open: '待合并', closed: '已关闭' };
+const $ = (selector) => document.querySelector(selector);
+function element(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
 }
-
-function renderProjects(projects, containerSelector = "#project-grid", numbered = true) {
-  const grid = document.querySelector(containerSelector);
-  if (!grid) return;
+function link(text, href, className) {
+  const node = element('a', className, text);
+  node.href = href;
+  return node;
+}
+function renderProjects(projects, selector, editorial = {}) {
+  const grid = $(selector);
   grid.replaceChildren();
-
-  if (projects.length === 0) {
-    grid.append(makeElement("p", "loading", "暂无项目。"));
+  if (!projects.length) {
+    grid.append(element('p', 'loading', '没有匹配的项目，试试其他关键词或切回“全部”。'));
     return;
   }
-
-  projects.forEach((project, index) => {
-    const card = makeElement("article", "project-card");
-    if (numbered) {
-      card.append(makeElement("span", "project-number", String(index + 1).padStart(2, "0")));
-    }
-
-    const heading = makeElement("h3");
-    if (project.repository_url) {
-      const link = makeElement("a", null, project.name);
-      link.href = project.repository_url;
-      link.setAttribute("aria-label", `${project.name} GitHub 仓库`);
-      heading.append(link);
-    } else {
-      heading.textContent = project.name;
-    }
-    card.append(heading, makeElement("p", null, project.role));
-
-    const meta = makeElement("div", "project-meta");
-    meta.append(makeElement("span", "dot"));
-    meta.append(
-      document.createTextNode(
-        `${statusLabels[project.status] || project.status} · ${project.visibility === "public" ? "Open source" : "Internal"}`,
-      ),
-    );
-
-    if (project.language) {
-      const langSpan = makeElement("span", "meta-badge", project.language);
-      meta.append(langSpan);
-    }
-    if (typeof project.stars === "number" && project.stars > 0) {
-      const starSpan = makeElement("span", "meta-badge", `★ ${project.stars}`);
-      meta.append(starSpan);
-    }
-    if (project.last_pushed_at) {
-      const pushedSpan = makeElement("span", "meta-date", project.last_pushed_at);
-      meta.append(pushedSpan);
-    }
-
+  projects.forEach((project) => {
+    const info = editorial[project.id] || {};
+    const card = element('article', 'project-card');
+    const heading = element('h3');
+    heading.append(project.repository_url ? link(project.name, project.repository_url) : document.createTextNode(project.name));
+    card.append(heading, element('p', null, selector === '#portfolio-grid' ? (info.contribution || project.role) : project.role));
+    const meta = element('div', 'project-meta');
+    if (selector === '#portfolio-grid') meta.append(element('span', 'meta-badge', kindLabels[info.kind || 'other']));
+    meta.append(element('span', null, statusLabels[project.status] || project.status));
+    if (project.language) meta.append(element('span', null, project.language));
+    if (project.visibility === 'private') meta.append(element('span', null, '内部组件'));
+    if (project.last_pushed_at) meta.append(element('span', 'meta-date', `代码更新 ${project.last_pushed_at}`));
     card.append(meta);
     grid.append(card);
   });
 }
-
-function renderPullRequests(pullRequests) {
-  const list = document.querySelector("#pr-list");
+function renderFeatured(projects, portfolio) {
+  const list = $('#featured-list');
   list.replaceChildren();
-  pullRequests.forEach((pullRequest) => {
-    const item = makeElement("li");
-    const link = makeElement(
-      "a",
-      null,
-      `${pullRequest.repository} · PR #${pullRequest.number}`,
-    );
-    link.href = pullRequest.url;
-    item.append(link);
+  portfolio.featured.forEach((id) => {
+    const project = projects.find((p) => p.id === id && p.visibility === 'public');
+    const info = portfolio.projects[id];
+    if (!project || !info) return;
+    const row = element('article', 'featured-project');
+    const title = element('div', 'featured-title');
+    title.append(element('span', 'feature-label', info.label), element('h3', null, project.name));
+    const body = element('div', 'featured-body');
+    body.append(element('p', 'feature-problem', info.problem), element('p', null, info.contribution));
+    body.append(link(`${info.proof} ↗`, info.proof_url, 'feature-link'));
+    row.append(title, body);
+    list.append(row);
+  });
+}
+function renderPullRequests(prs) {
+  const list = $('#pr-list');
+  list.replaceChildren();
+  if (!prs.length) list.append(element('li', 'loading', '当前没有公开发布记录。'));
+  prs.forEach((pr) => {
+    const item = element('li');
+    const anchor = link(`${pr.repository} · PR #${pr.number}`, pr.url);
+    anchor.append(element('span', `pr-state ${pr.state || 'unknown'}`, prLabels[pr.state] || '状态待确认'));
+    item.append(anchor);
     list.append(item);
   });
 }
-
-async function loadStatus() {
-  const response = await fetch("data/status.json", { cache: "no-store" });
-  if (!response.ok) throw new Error(`status request failed: ${response.status}`);
-  const status = await response.json();
-  const initiative = status.initiative;
-  const percent = Math.round((initiative.acceptance.passed / initiative.acceptance.total) * 100);
-
-  document.querySelector("#hero-status").textContent =
-    statusLabels[initiative.status] || initiative.status;
-  document.querySelector("#hero-summary").textContent = initiative.summary;
-  document.querySelector("#initiative-summary").textContent = initiative.summary;
-  document.querySelector("#progress-label").textContent =
-    `${initiative.acceptance.passed} / ${initiative.acceptance.total}`;
-  document.querySelector("#progress-bar").style.width = `${percent}%`;
-  document.querySelector("#verified-at").textContent = initiative.last_verified;
-  document.querySelector("#verified-at").dateTime = initiative.last_verified;
-  document.querySelector("#generated-at").textContent = status.generated_at;
-  document.querySelector("#generated-at").dateTime = status.generated_at;
-  const infraProjects = status.projects.filter((p) => p.category !== "portfolio");
-  const portfolioProjects = status.projects.filter((p) => p.category === "portfolio");
-  document.querySelector("#project-count").textContent = infraProjects.length;
-  document.querySelector("#acceptance-count").textContent = `${percent}%`;
-
-  renderProjects(infraProjects);
-  renderProjects(portfolioProjects, "#portfolio-grid", false);
-  renderPullRequests(initiative.public_pull_requests);
+async function readJSON(path) {
+  const response = await fetch(path, { cache: 'no-store' });
+  if (!response.ok) throw new Error(`${path}: ${response.status}`);
+  return response.json();
 }
-
+async function loadStatus() {
+  // Optional editorial metadata must not take down the public status view.
+  const [status, portfolio] = await Promise.all([
+    readJSON('data/status.json'),
+    readJSON('data/portfolio.json').catch(() => null),
+  ]);
+  const initiative = status.initiative;
+  const { passed, total } = initiative.acceptance;
+  const percent = total > 0 ? Math.max(0, Math.min(100, Math.round(passed / total * 100))) : 0;
+  const phase = statusLabels[initiative.status] || initiative.status;
+  $('#hero-status').textContent = phase;
+  $('#initiative-stage').textContent = phase;
+  $('#release-title').textContent = initiative.title;
+  $('#hero-summary').textContent = $('#initiative-summary').textContent = initiative.summary;
+  $('#progress-label').textContent = `${passed} / ${total}`;
+  $('#progress-bar').style.width = `${percent}%`;
+  $('#acceptance-count').textContent = total > 0 ? `${percent}%` : '待验证';
+  for (const [selector, value] of [['#verified-at', initiative.last_verified], ['#generated-at', status.generated_at]]) {
+    $(selector).textContent = value || '未记录';
+    if (value) $(selector).dateTime = value;
+  }
+  const infra = status.projects.filter((p) => p.category !== 'portfolio');
+  const projects = status.projects.filter((p) => p.visibility === 'public');
+  $('#project-count').textContent = infra.length;
+  renderProjects(infra, '#project-grid', portfolio?.projects);
+  renderPullRequests(initiative.public_pull_requests || []);
+  if (portfolio) renderFeatured(projects, portfolio);
+  else $('#featured-list').replaceChildren(link('代表作信息暂不可用，浏览全部源码 ↗', 'https://github.com/hwj123hwj'));
+  let filter = 'all';
+  const renderCatalog = () => {
+    const query = $('#project-search').value.trim().toLocaleLowerCase();
+    const matches = projects.filter((project) => {
+      const info = portfolio?.projects[project.id] || {};
+      const kind = info.kind || 'other';
+      return (filter === 'all' || kind === filter) &&
+        `${project.name} ${project.role} ${info.contribution || ''} ${kindLabels[kind]}`.toLocaleLowerCase().includes(query);
+    });
+    renderProjects(matches, '#portfolio-grid', portfolio?.projects);
+    $('#catalog-count').textContent = `显示 ${matches.length} / ${projects.length} 个公开项目`;
+  };
+  document.querySelectorAll('[data-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      filter = button.dataset.filter;
+      document.querySelectorAll('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+      renderCatalog();
+    });
+  });
+  $('#project-search').addEventListener('input', renderCatalog);
+  renderCatalog();
+}
 loadStatus().catch((error) => {
   console.error(error);
-  document.querySelector("#hero-status").textContent = "状态暂不可用";
-  document.querySelector("#hero-summary").textContent = "公开状态文件加载失败，请稍后刷新。";
-  document.querySelector("#project-grid").replaceChildren(
-    makeElement("p", "loading", "项目状态暂时无法载入。"),
-  );
-  const portfolioGrid = document.querySelector("#portfolio-grid");
-  if (portfolioGrid) {
-    portfolioGrid.replaceChildren(makeElement("p", "loading", "项目状态暂时无法载入。"));
+  $('#hero-status').textContent = '状态暂不可用';
+  $('#hero-summary').textContent = $('#initiative-summary').textContent = '公开状态加载失败，请刷新重试，或直接查看 GitHub 源码。';
+  for (const selector of ['#featured-list', '#project-grid', '#portfolio-grid', '#pr-list']) {
+    const tag = selector === '#pr-list' ? 'li' : 'p';
+    const message = element(tag, 'loading');
+    message.append(link('暂时无法载入，浏览 GitHub 项目 ↗', 'https://github.com/hwj123hwj'));
+    $(selector).replaceChildren(message);
   }
-  document.querySelector("#pr-list").replaceChildren(
-    makeElement("li", "loading", "发布门禁暂时无法载入。"),
-  );
+  $('#project-search').disabled = true;
+  document.querySelectorAll('[data-filter]').forEach((button) => { button.disabled = true; });
 });

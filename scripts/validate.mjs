@@ -18,6 +18,26 @@ for (const project of status.projects) {
   }
 }
 
+const portfolio = JSON.parse(readFileSync(join(root, "data/portfolio.json"), "utf8"));
+const projectsById = new Map(status.projects.map((project) => [project.id, project]));
+const kinds = new Set(["tool", "learning", "fork", "other"]);
+if (!Array.isArray(portfolio.featured) || new Set(portfolio.featured).size !== portfolio.featured.length) {
+  throw new Error("featured projects must be a unique list");
+}
+for (const [id, info] of Object.entries(portfolio.projects)) {
+  if (!projectsById.has(id) || !kinds.has(info.kind)) throw new Error(`invalid portfolio entry: ${id}`);
+  if (info.proof_url) {
+    const url = new URL(info.proof_url);
+    if (url.protocol !== "https:" || url.username || url.password) throw new Error(`invalid proof URL: ${id}`);
+  }
+}
+for (const id of portfolio.featured) {
+  const info = portfolio.projects[id];
+  if (projectsById.get(id)?.visibility !== "public" || !info?.problem || !info?.contribution || !info?.proof_url || !info?.proof || !info?.label) {
+    throw new Error(`featured project must have public evidence and contribution: ${id}`);
+  }
+}
+
 const patterns = [
   new RegExp(("github" + "_pat_") + "[A-Za-z0-9_]+", "g"),
   new RegExp(("gh" + "p_") + "[A-Za-z0-9]{20,}", "g"),

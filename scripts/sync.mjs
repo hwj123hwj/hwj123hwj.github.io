@@ -59,28 +59,11 @@ async function sync() {
     }
   }
 
-  // 2. Discover new public repos (ignore portal itself and wx_key/temp forks if desired)
+  // Public discovery is informational; portfolio inclusion is an editorial choice.
   const ignoredRepos = new Set(["hwj123hwj.github.io", "wx_key"]);
-
   for (const repo of repos) {
-    const repoKey = repo.name.toLowerCase();
-    if (ignoredRepos.has(repoKey)) continue;
-
-    if (!existingProjectIds.has(repoKey)) {
-      console.log(`✨ Discovered new repository: ${repo.name}`);
-      status.projects.push({
-        id: repo.name,
-        name: repo.name,
-        role: repo.description || "开源项目与实践",
-        status: "active",
-        visibility: "public",
-        category: "portfolio",
-        repository_url: repo.html_url,
-        stars: repo.stargazers_count,
-        language: repo.language || null,
-        last_pushed_at: repo.pushed_at ? repo.pushed_at.slice(0, 10) : null,
-      });
-      existingProjectIds.add(repoKey);
+    if (!ignoredRepos.has(repo.name.toLowerCase()) && !existingProjectIds.has(repo.name.toLowerCase())) {
+      console.log(`Not listed: ${repo.name} (add to status.json after review)`);
       discoveredCount++;
     }
   }
@@ -105,7 +88,7 @@ async function sync() {
 
   writeFileSync(statusPath, JSON.stringify(status, null, 2) + "\n", "utf8");
   console.log(
-    `✅ Sync complete: updated ${updatedCount} existing projects, discovered ${discoveredCount} new projects.`,
+    `✅ Sync complete: updated ${updatedCount} existing projects, found ${discoveredCount} unlisted projects.`,
   );
 }
 
