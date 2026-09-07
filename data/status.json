@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-06",
+  "generated_at": "2026-09-07",
   "initiative": {
     "id": "data-flywheel",
     "title": "统一 AI 对话知识飞轮",
@@ -76,7 +76,7 @@
       "repository_url": "https://github.com/hwj123hwj/hwj-wiki",
       "stars": 0,
       "language": "TypeScript",
-      "last_pushed_at": "2026-09-01"
+      "last_pushed_at": "2026-09-07"
     },
     {
       "id": "pi-go",
@@ -88,7 +88,7 @@
       "repository_url": "https://github.com/hwj123hwj/pi-go",
       "stars": 3,
       "language": "Go",
-      "last_pushed_at": "2026-08-10"
+      "last_pushed_at": "2026-09-07"
     },
     {
       "id": "custom-skills",
@@ -160,7 +160,7 @@
       "repository_url": "https://github.com/hwj123hwj/go-learning-for-java-dev",
       "stars": 0,
       "language": "Go",
-      "last_pushed_at": "2026-06-02"
+      "last_pushed_at": "2026-09-07"
     },
     {
       "id": "palmier-pro",
@@ -207,8 +207,8 @@
       "category": "portfolio",
       "repository_url": "https://github.com/hwj123hwj/easycode-skills",
       "stars": 0,
-      "language": "Python",
-      "last_pushed_at": "2026-09-06"
+      "language": "HTML",
+      "last_pushed_at": "2026-09-07"
     }
   ]
 }
