@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-12",
+  "generated_at": "2026-09-13",
   "initiative": {
     "id": "data-flywheel",
     "title": "统一 AI 对话知识飞轮",
@@ -160,7 +160,7 @@
       "repository_url": "https://github.com/hwj123hwj/go-learning-for-java-dev",
       "stars": 0,
       "language": "Go",
-      "last_pushed_at": "2026-09-07"
+      "last_pushed_at": "2026-09-12"
     },
     {
       "id": "palmier-pro",
