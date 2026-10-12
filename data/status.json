@@ -1,55 +1,49 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11",
+  "generated_at": "2026-10-12",
   "initiative": {
-    "id": "data-flywheel",
-    "title": "统一 AI 对话知识飞轮",
-    "status": "release-candidate",
-    "summary": "5 个飞轮仓库的发布门禁 PR 已全部合并；本地链路已恢复。正在等待真实模型 E2E 复测与凭证轮换。",
-    "last_verified": "2026-08-12",
+    "id": "agent-infra",
+    "title": "个人 Agent 基础设施",
+    "status": "active",
+    "summary": "easyagent（CLI/桌面/移动端）与 EasyGateway 网关已值守运行，经验沉淀统一到 agent-lessons 检索；正在把同一套能力延伸到 ESP32 硬件终端。",
+    "last_verified": "2026-10-12",
     "acceptance": {
-      "passed": 11,
-      "total": 12
+      "passed": 3,
+      "total": 4
     },
     "public_pull_requests": [
       {
+        "repository": "easyagent",
+        "number": 116,
+        "url": "https://github.com/hwj123hwj/easyagent/pull/116",
+        "state": "merged"
+      },
+      {
         "repository": "litellm-gateway",
-        "number": 27,
-        "url": "https://github.com/hwj123hwj/litellm-gateway/pull/27",
-        "state": "merged"
-      },
-      {
-        "repository": "hwjcode",
-        "number": 37,
-        "url": "https://github.com/hwj123hwj/hwjcode/pull/37",
-        "state": "merged"
-      },
-      {
-        "repository": "hwjcode",
-        "number": 38,
-        "url": "https://github.com/hwj123hwj/hwjcode/pull/38",
+        "number": 85,
+        "url": "https://github.com/hwj123hwj/litellm-gateway/pull/85",
         "state": "merged"
       }
     ]
   },
   "projects": [
     {
-      "id": "hwjcode",
-      "name": "HwjCode",
-      "role": "个人 AI 工作台、CLI/飞书入口与跨 Agent 编排层",
-      "status": "release-candidate",
+      "id": "easyagent",
+      "name": "EasyAgent",
+      "role": "个人 Agent 框架：会话、工具与技能运行时，CLI/桌面/移动端三端入口，SDK 与应用分层",
+      "status": "active",
       "visibility": "public",
       "category": null,
-      "repository_url": "https://github.com/hwj123hwj/hwjcode",
-      "stars": 0,
-      "language": "TypeScript",
-      "last_pushed_at": "2026-08-23"
+      "repository_url": "https://github.com/hwj123hwj/easyagent",
+      "stars": 4,
+      "language": "Go",
+      "last_pushed_at": "2026-10-11"
     },
     {
       "id": "litellm-gateway",
-      "name": "LLM Gateway",
-      "role": "统一模型 API、认证、能力路由、fallback、归档与可观测性",
-      "status": "release-candidate",
+      "name": "EasyGateway",
+      "role": "统一 LLM 网关：多模型路由与 fallback、请求归档与可观测，迷你主机常驻并自动更新值守",
+      "status": "active",
       "visibility": "public",
       "category": null,
       "repository_url": "https://github.com/hwj123hwj/litellm-gateway",
@@ -59,36 +53,24 @@
     },
     {
       "id": "agent-lessons",
-      "name": "Knowledge Compiler",
-      "role": "多源对话同步、去重、编译与反馈环隔离",
-      "status": "release-candidate",
+      "name": "经验库 agent-lessons",
+      "role": "踩坑记录、项目日志与经验文档，统一检索入口",
+      "status": "active",
       "visibility": "private",
       "category": null,
       "repository_url": null
     },
     {
-      "id": "hwj-wiki",
-      "name": "Knowledge Index",
-      "role": "个人知识库编译、索引、检索与可视化",
-      "status": "release-candidate",
+      "id": "kaoyan-math-lab",
+      "name": "kaoyan-math-lab",
+      "role": "考研数学互动练习站，GitHub Pages 部署",
+      "status": "active",
       "visibility": "public",
-      "category": null,
-      "repository_url": "https://github.com/hwj123hwj/hwj-wiki",
+      "category": "portfolio",
+      "repository_url": "https://github.com/hwj123hwj/kaoyan-math-lab",
       "stars": 0,
-      "language": "TypeScript",
-      "last_pushed_at": "2026-09-15"
-    },
-    {
-      "id": "pi-go",
-      "name": "pi-go",
-      "role": "底层 Agent 与项目知识能力",
-      "status": "integrated",
-      "visibility": "public",
-      "category": null,
-      "repository_url": "https://github.com/hwj123hwj/pi-go",
-      "stars": 4,
-      "language": "Go",
-      "last_pushed_at": "2026-09-26"
+      "language": "Astro",
+      "last_pushed_at": "2026-10-11"
     },
     {
       "id": "custom-skills",
@@ -101,18 +83,6 @@
       "stars": 4,
       "language": "JavaScript",
       "last_pushed_at": "2026-09-30"
-    },
-    {
-      "id": "open-kimi-ppt-skill",
-      "name": "open-kimi-ppt-skill",
-      "role": "Kimi 幻灯片 Skill：让 Agent 生成可编辑 PPTD + PPTX，附本地浏览器编辑器",
-      "status": "active",
-      "visibility": "public",
-      "category": "portfolio",
-      "repository_url": "https://github.com/hwj123hwj/open-kimi-ppt-skill",
-      "stars": 0,
-      "language": "Python",
-      "last_pushed_at": "2026-08-10"
     },
     {
       "id": "rust-smart-pot",
@@ -160,7 +130,7 @@
       "repository_url": "https://github.com/hwj123hwj/go-learning-for-java-dev",
       "stars": 0,
       "language": "Go",
-      "last_pushed_at": "2026-09-12"
+      "last_pushed_at": "2026-10-12"
     },
     {
       "id": "palmier-pro",
@@ -185,18 +155,6 @@
       "stars": 0,
       "language": "JavaScript",
       "last_pushed_at": "2026-08-18"
-    },
-    {
-      "id": "deepseek-harness",
-      "name": "deepseek-harness",
-      "role": "DeepSeek Harness: Everything is a Plugin.",
-      "status": "active",
-      "visibility": "public",
-      "category": "portfolio",
-      "repository_url": "https://github.com/hwj123hwj/deepseek-harness",
-      "stars": 0,
-      "language": null,
-      "last_pushed_at": "2026-08-13"
     },
     {
       "id": "easycode-skills",

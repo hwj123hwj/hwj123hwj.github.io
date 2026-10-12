@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Hwj 的项目与实践：AI 编程协作、项目知识工具与 Java 转 Go 交互教学。查看代表作、个人贡献和公开验证状态。"
+      content="Hwj 的项目与实践：个人 Agent 基础设施（easyagent + EasyGateway）、AI 编程协作与 Java 转 Go 交互教学。查看代表作、个人贡献和公开验证状态。"
     />
     <meta name="theme-color" content="#0b1412" />
     <title>Hwj · 项目与实践</title>
@@ -35,7 +35,7 @@
           <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Building in public</p>
           <h1>把开发中的问题，<br /><em>做成可复用的工具。</em></h1>
           <p class="hero-lead">
-            我是 Hwj，围绕 AI 编程协作、项目知识和后端学习持续实践。这里记录做出的工具、对上游的改造，以及能跟着练的教学项目。
+            我是 Hwj，围绕 AI 编程协作、个人 Agent 基础设施和后端学习持续实践。这里记录做出的工具、对上游的改造，以及能跟着练的教学项目。
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#featured">先看代表作</a>
@@ -47,7 +47,7 @@
           <div class="release-card-head">
             <div>
               <p class="card-kicker">Active initiative</p>
-              <h2 id="release-title">统一 AI 对话知识飞轮</h2>
+              <h2 id="release-title">个人 Agent 基础设施</h2>
             </div>
             <span class="status-pill" id="hero-status">载入中</span>
           </div>
@@ -72,23 +72,23 @@
         <div class="section-heading split-heading">
           <div>
 
-            <h2 id="architecture-title">从调用到知识，不再散落</h2>
+            <h2 id="architecture-title">从入口到经验，一条链路</h2>
           </div>
-          <p>每一层只承担清晰职责，并用可验证的契约连接。网关保留审计线索，知识管道负责脱敏、去重与沉淀。</p>
+          <p>每一层只承担清晰职责，并用可验证的契约连接。网关保留审计线索，经验库负责踩坑沉淀与统一检索。</p>
         </div>
-        <ol class="pipeline" aria-label="AI 知识飞轮处理流程">
-          <li><span>01</span><strong>AI 入口</strong><small>CLI · 飞书 · Agent</small></li>
-          <li><span>02</span><strong>统一网关</strong><small>路由 · fallback · 归档</small></li>
-          <li><span>03</span><strong>知识编译</strong><small>脱敏 · 去重 · 提炼</small></li>
-          <li><span>04</span><strong>索引检索</strong><small>搜索 · 回溯 · 可视化</small></li>
-          <li><span>05</span><strong>反馈增强</strong><small>为下一次对话提供上下文</small></li>
+        <ol class="pipeline" aria-label="个人 Agent 基础设施链路">
+          <li><span>01</span><strong>多端入口</strong><small>CLI · 桌面 · 移动端</small></li>
+          <li><span>02</span><strong>Agent 运行时</strong><small>会话 · 工具 · 技能</small></li>
+          <li><span>03</span><strong>统一网关</strong><small>路由 · fallback · 归档</small></li>
+          <li><span>04</span><strong>运行值守</strong><small>自动更新 · 健康检查 · 回滚</small></li>
+          <li><span>05</span><strong>经验沉淀</strong><small>踩坑复盘 · 统一检索</small></li>
         </ol>
       </section>
 
       <section class="section" id="projects" aria-labelledby="projects-title">
         <div class="section-heading">
 
-          <h2 id="projects-title">五个组件，一条主线</h2>
+          <h2 id="projects-title">三个组件，一条主线</h2>
           <p>公开仓库可直接查看源码；内部组件只展示它们在系统中的职责。</p>
         </div>
         <div class="project-grid" id="project-grid" aria-live="polite">
@@ -123,10 +123,10 @@
 
           <h2 id="initiative-title">持续追踪实际进展</h2>
           <p id="initiative-summary">
-            候选链路已完成跨项目验证。完成不以文档勾选为准，而以合并、部署与生产环境复测为准。
+            easyagent 与 EasyGateway 已在日常使用中值守运行。完成不以文档勾选为准，而以合并、部署与生产环境复测为准。
           </p>
           <dl class="metrics">
-            <div><dt>核心组件</dt><dd id="project-count">5</dd></div>
+            <div><dt>核心组件</dt><dd id="project-count">3</dd></div>
             <div><dt>验收通过</dt><dd id="acceptance-count">—</dd></div>
             <div><dt>阶段</dt><dd id="initiative-stage">—</dd></div>
           </dl>

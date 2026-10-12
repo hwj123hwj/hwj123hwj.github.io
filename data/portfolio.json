@@ -1,25 +1,25 @@
 {
   "featured": [
-    "hwjcode",
-    "hwj-wiki",
+    "easyagent",
+    "litellm-gateway",
     "go-learning-for-java-dev"
   ],
   "projects": {
-    "hwjcode": {
-      "kind": "fork",
-      "label": "Agent 协作",
-      "problem": "把编码任务从本地终端带到飞书协作现场。",
-      "contribution": "基于 Easy Code 改造，增加飞书入口、Worktree 并行隔离和个人版更新链路。",
-      "proof": "查看集成方式与使用示例",
-      "proof_url": "https://github.com/hwj123hwj/hwjcode#readme"
+    "easyagent": {
+      "kind": "tool",
+      "label": "Agent 框架",
+      "problem": "让个人 Agent 能力长在自己的工具链上，而不是托管在某家产品里。",
+      "contribution": "Go 实现的 Agent 运行时：会话压缩、工具与技能体系，CLI、桌面与移动端三端入口，SDK 与应用分层，发布后由自动更新器保持最新。",
+      "proof": "查看 EasyAgent 源码",
+      "proof_url": "https://github.com/hwj123hwj/easyagent"
     },
-    "hwj-wiki": {
-      "kind": "fork",
-      "label": "项目知识",
-      "problem": "让项目经验能被下一次开发找回、复核和复用。",
-      "contribution": "基于 OpenWiki 改造，围绕个人项目增加知识整理、索引与上下文工作流，保留上游文档生成能力。",
-      "proof": "查看知识工具源码",
-      "proof_url": "https://github.com/hwj123hwj/hwj-wiki"
+    "litellm-gateway": {
+      "kind": "tool",
+      "label": "LLM 网关",
+      "problem": "多个模型供应商、多个入口端，认证、路由与审计不能各自为政。",
+      "contribution": "统一 OpenAI 兼容入口：多模型路由与 fallback、请求归档与可观测；迷你主机 systemd 常驻，自动构建健康才切换、失败自动回滚。",
+      "proof": "查看网关源码",
+      "proof_url": "https://github.com/hwj123hwj/litellm-gateway"
     },
     "go-learning-for-java-dev": {
       "kind": "learning",
@@ -29,6 +29,9 @@
       "proof": "打开交互学习实验室",
       "proof_url": "https://hwj123hwj.github.io/go-learning-for-java-dev/"
     },
+    "kaoyan-math-lab": {
+      "kind": "learning"
+    },
     "palmier-pro": {
       "kind": "fork",
       "label": "本地视频工具",
@@ -37,16 +40,7 @@
     "k8s-learn": {
       "kind": "learning"
     },
-    "litellm-gateway": {
-      "kind": "tool"
-    },
-    "pi-go": {
-      "kind": "tool"
-    },
     "custom-skills": {
-      "kind": "tool"
-    },
-    "open-kimi-ppt-skill": {
       "kind": "tool"
     },
     "pi-extensions": {
